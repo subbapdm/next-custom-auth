@@ -6,7 +6,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="font-sans items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+    <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <div className="max-w-7xl  gap-5 py-5 px-10">
         <div className="my-5">
           <h1 className="font-bold text-2xl text-gray-700 mb-3">
@@ -29,7 +29,7 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="mt-20">
+      <footer className="mt-20 text-center">
         <p className="text-[12px] text-gray-500">
           © 2025 Padam Subba. All Rights Reserved.
         </p>
