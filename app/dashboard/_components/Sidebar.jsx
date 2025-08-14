@@ -13,11 +13,11 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <div className="p-3">
-      <div className="my-2">
+    <div className="p-3 bg-white h-full">
+      <div className="my-2 p-3">
         <Link href="/" className="flex items-center">
           <Atom size={25} className="text-sky-500" />
-          <span className="font-semibold text-xl ml-2 text-sky-500">Logo</span>
+          <span className="font-semibold text-xl ml-2">customAuth</span>
         </Link>
       </div>
       <div className="mt-5">
