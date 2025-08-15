@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import User from "@/models/User";
 import { comparePassword } from "@/lib/auth";
+import { generateToken } from "@/lib/token";
 
 export async function POST(request){
     try {
@@ -25,7 +26,10 @@ export async function POST(request){
             return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
         }
 
+        const token = generateToken(user);
+
         const response = NextResponse.json({ message: "Login successful"});
+        response.cookies.set('token', token, { httpOnly: true, path: '/' });
 
         return response;
 
