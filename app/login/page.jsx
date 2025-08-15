@@ -2,16 +2,35 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const page = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       // API call
+      const res = await fetch('/api/auth/login', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if(!res.ok){
+        toast.error(data.error || 'Login failed!');
+        return;
+      }
+
+      toast.success(data.message);
+      router.push('/dashboard');
 
     } catch (error) {
       toast.error("Something went wrong!");

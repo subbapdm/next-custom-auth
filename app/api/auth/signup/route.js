@@ -20,10 +20,10 @@ export async function POST(request){
 
         const hashedPassword = await hashPassword(password);
 
-        const user = User.create({ fullName, email, password: hashedPassword });
+        User.create({ fullName, email, password: hashedPassword });
         return NextResponse.json({ message: "User registered successfully" });
 
     } catch (error) {
-        return NextResponse.json({ error: "Server error: signup route"}, { status: 500 });
+        return NextResponse.json({ error: "Server error with singup api"}, { status: 500 });
     }
 }
