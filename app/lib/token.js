@@ -1,6 +1,6 @@
 // import jwt from "jsonwebtoken";
 
-// **** The Edge runtime does not support the jsonwebtoken package. When your middleware ( in middleware.js we verify token to check validity ) tries to call jwt.verify() from jsonwebtoken, it fails before it even gets to validate your token. This caused error or returns null and token is not verified so i have switched to a middleware-compatible JWT library (jose) and commented this section
+// **** The Edge runtime does not support the jsonwebtoken package. When your middleware ( in middleware.js we verify token to check validity ) tries to call jwt.verify() from jsonwebtoken, it fails before it even gets to validate your token. This causes error or returns null and token is not verified so i have switched to a middleware-compatible JWT library (jose) and commented this section
 // ****
 
 // export function generateToken(user){
@@ -26,7 +26,7 @@ const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function generateToken(user){
     return await new SignJWT({
-        id: user._id,
+        id: user._id.toString(), // Converts to string from Buffer
         email: user.email,
         role: user.role
     })

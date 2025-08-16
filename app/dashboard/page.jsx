@@ -1,8 +1,9 @@
-import React from "react";
-import Navbar from "./_components/Navbar";
-import Sidebar from "./_components/Sidebar";
+"use client"
+
 import CustomBarChart from "./_components/charts/CustomBarChart";
 import CustomPieChart from "./_components/charts/CustomPieChart";
+
+// import useCurrentUser from "@/hooks/useCurrentUser";
 
 const barData = [
   {
@@ -34,7 +35,7 @@ const barData = [
     uv: 1890,
     pv: 4800,
     amt: 2181,
-  }
+  },
 ];
 
 const pieData = [
@@ -44,42 +45,36 @@ const pieData = [
   { name: "Group D", value: 200 },
 ];
 
-const page = () => {
+const DashboardHome = () => {
+
+  // const { user, loading, error } = useCurrentUser();
+
+  
+
   return (
-    <div className="w-full h-full">
-      <div className="flex flex-row h-full">
-        <div className="flex-1 md:max-w-[250px] mr-5">
-          <Sidebar />
+    <main className="h-full mt-5">
+      <div className="p-5 bg-white rounded-md">
+        <h1 className="text-xl font-bold">Dashboard</h1>
+        <p className="text-sm text-gray-500 my-2">
+          Hello, {'user'} this is dashboard page. Where you can manage your data.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
+        <div className="p-4 bg-white rounded-md">
+          <div className="flex items-center justify-between mb-7">
+            <h5 className="text-sm">Income Overview</h5>
+          </div>
+          <CustomBarChart barData={barData} />
         </div>
-        <div className="flex-4">
-          <Navbar />
-          <main className="h-full mt-5">
-            <div className="p-5 bg-white rounded-md">
-              <h1 className="text-xl font-bold">Dashboard</h1>
-              <p className="text-sm text-gray-500 my-2">
-                Hello, Padam this is dashboard page. Where you can manage your
-                data.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
-              <div className="p-4 bg-white rounded-md">
-                <div className="flex items-center justify-between mb-7">
-                  <h5 className="text-sm">Income Overview</h5>
-                </div>
-                <CustomBarChart barData={barData} />
-              </div>
-              <div className="p-4 bg-white rounded-md">
-                <div className="flex items-center justify-between mb-7">
-                  <h5 className="text-sm">Expense Overview</h5>
-                </div>
-                <CustomPieChart pieData={pieData} />
-              </div>
-            </div>
-          </main>
+        <div className="p-4 bg-white rounded-md">
+          <div className="flex items-center justify-between mb-7">
+            <h5 className="text-sm">Expense Overview</h5>
+          </div>
+          <CustomPieChart pieData={pieData} />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
-export default page;
+export default DashboardHome;

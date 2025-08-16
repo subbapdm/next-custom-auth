@@ -37,7 +37,7 @@ const Sidebar = () => {
             <span>Products</span>
           </Link>
           <Link
-            href="/dashboard"
+            href="/dashboard/users"
             className="flex gap-2 text-[13px] font-semibold hover:bg-gray-100 text-gray-500 py-3 px-3  mb-4 rounded-lg"
           >
             <Users size={20} />

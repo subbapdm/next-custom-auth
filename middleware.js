@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { verifyToken } from "./lib/token";
+import { verifyToken } from "./app/lib/token";
 
 const protectedRoutes = ["/dashboard"];
 const publicRoutes = ["/login", "/signup"];
@@ -10,8 +10,8 @@ export default async function middleware(request){
     const isPublicRoute = publicRoutes.includes(path);
 
     const token = request.cookies.get("token")?.value;
+   
     const decoded = await verifyToken(token);
-    console.log(decoded);
 
     if(isProtectedRoute && !decoded?.id){
         return NextResponse.redirect(new URL("/login", request.nextUrl));
@@ -25,5 +25,9 @@ export default async function middleware(request){
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)']
+ matcher: [
+    '/dashboard/:path*',   // Protect the dashboard route
+    '/login',              // Add login to be checked by the middleware
+    '/signup',           // Add register to be checked by the middleware
+  ],
 }
