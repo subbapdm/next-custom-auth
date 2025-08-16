@@ -9,9 +9,7 @@ export default async function middleware(request){
     const isProtectedRoute = protectedRoutes.includes(path);
     const isPublicRoute = publicRoutes.includes(path);
 
-    const token = request.cookies.get("token")?.value;
-   
-    const decoded = await verifyToken(token);
+    const decoded = await verifyToken();
 
     if(isProtectedRoute && !decoded?.id){
         return NextResponse.redirect(new URL("/login", request.nextUrl));

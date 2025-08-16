@@ -1,9 +1,7 @@
-"use client"
-
+import { getServerSession } from "../lib/session";
 import CustomBarChart from "./_components/charts/CustomBarChart";
 import CustomPieChart from "./_components/charts/CustomPieChart";
 
-// import useCurrentUser from "@/hooks/useCurrentUser";
 
 const barData = [
   {
@@ -45,18 +43,16 @@ const pieData = [
   { name: "Group D", value: 200 },
 ];
 
-const DashboardHome = () => {
+const DashboardHome = async () => {
 
-  // const { user, loading, error } = useCurrentUser();
-
-  
+  const { user } = await getServerSession(); // But this only works in server components
 
   return (
     <main className="h-full mt-5">
       <div className="p-5 bg-white rounded-md">
         <h1 className="text-xl font-bold">Dashboard</h1>
         <p className="text-sm text-gray-500 my-2">
-          Hello, {'user'} this is dashboard page. Where you can manage your data.
+          Hello, {user.fullName} this is dashboard page. Where you can manage your data.
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
