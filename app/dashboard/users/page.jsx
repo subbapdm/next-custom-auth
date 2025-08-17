@@ -4,9 +4,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Table from "../_components/tables/Table";
+import { useUser } from "@/context/userContext";
 
 const page = () => {
     const [users, setUsers] = useState([]);
+    
+   const { user }  = useUser();
 
     const router = useRouter();
 
@@ -41,7 +44,7 @@ const page = () => {
 
       <div className="grid grid-cols-1 gap-5 my-5">
         <div className="p-4 bg-white rounded-md">
-          <Table users={users} />
+          <Table users={users} currentUser={user} />
         </div>
       </div>
     </main>

@@ -20,7 +20,6 @@
 // }
 
 import { SignJWT, jwtVerify } from "jose";
-import { cookies } from "next/headers";
 
 const secretKey = process.env.JWT_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
@@ -37,20 +36,17 @@ export async function generateToken(user){
     .sign(encodedKey)
 }
 
-export async function verifyToken(){
+export async function verifyToken(token){
     try {
-        const token = (await cookies()).get("token")?.value;
-
         if(!token){
             return null;
         }
-
         const { payload } = await jwtVerify(token, encodedKey, {
             algorithms: ["HS256"]
         });
         return payload;
     } catch (error) {
-        console.log("Failed to verify token", error.message);
+        console.log("Failed to verify token:", error.message);
         return null;
     }
 }

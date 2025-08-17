@@ -1,6 +1,8 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import { getCurrentUser } from "./lib/getUser";
+import { UserProvider } from "@/context/userContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,12 +16,17 @@ export const metadata = {
   description: "Custom Nextjs authentication flow",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+
+  const user = await getCurrentUser();
+
   return (
     <html lang="en">
       <body className={poppins.className}>
         <div className="h-screen flex items-center justify-center bg-slate-50">
-          {children}
+            <UserProvider initialUser={user}>
+              {children}
+            </UserProvider>
         </div>
         <Toaster/>
       </body>

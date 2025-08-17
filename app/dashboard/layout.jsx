@@ -2,7 +2,7 @@
 import Navbar from "./_components/Navbar"
 import Sidebar from "./_components/Sidebar"
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout =  async ({ children }) => {
   return (
     <div className="w-full h-full">
       <div className="flex flex-row h-full">

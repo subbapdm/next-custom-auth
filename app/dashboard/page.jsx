@@ -1,7 +1,8 @@
-import { getServerSession } from "../lib/session";
+"use client"
+
+import { useUser } from "@/context/userContext";
 import CustomBarChart from "./_components/charts/CustomBarChart";
 import CustomPieChart from "./_components/charts/CustomPieChart";
-
 
 const barData = [
   {
@@ -43,9 +44,9 @@ const pieData = [
   { name: "Group D", value: 200 },
 ];
 
-const DashboardHome = async () => {
+const DashboardHome = () => {
 
-  const { user } = await getServerSession(); // But this only works in server components
+  const { user }  = useUser();
 
   return (
     <main className="h-full mt-5">
